@@ -1,51 +1,68 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+
+import SmallCard from "../components/Small Card";
+import axios from "axios";
+const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 
 class Dashboard extends Component {
-  state = {
-    firstName: "",
-    lastName: "",
-    userName: "",
-    email: "",
-    age: 0,
-    liked: [],
-    disliked: []
-  };
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      error: null,
+      isLoaded: false,
+      data: []
+    };
+    }
   componentDidMount() {
-    this.loadUser();
-    this.loadUsers();
+    this.searchRes();
+
+  }
+  searchRes() {
+    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=Richmond`, {
+      headers: {
+        Authorization: `Bearer ${pass}`
+    },
+      params: {
+      categories: 'pubs',
+      limit: 8
+    }
+    })
+    .then((res) => {
+      this.setState({
+        isLoaded: true,
+        data: res.data.businesses
+      },()=>console.log(this.state))
+
+      // console.log(res.data)
+      // console.log(this.state)
+    })
+
   }
 
-  loadUser = (id) => {
-    API.getUser(id)
-      .then(res =>
-        this.setState({ user: res.data})
-      )
-      .catch(err => console.log(err));
-  };
-
-  loadUsers = () => (
-    API.getUsers()
-  )
-
   render() {
+    const { error, isLoaded, data } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }   else if (!isLoaded) {
+      return <div>Loading...</div>;
+    }  else { 
+
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
-            Welcome to The site: {this.state.userName}
+        {data.map(place=>
+          <Col size="md-3">
+            {console.log(data)}
+
+              <SmallCard name={place.name} img={place.image_url} />
+
           </Col>
+          )}
         </Row>
       </Container>
     );
   }
+  }
 }
-
 export default Dashboard;
