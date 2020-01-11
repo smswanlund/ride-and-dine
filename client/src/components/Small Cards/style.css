@@ -1,0 +1,31 @@
+.card-header{
+    background-color: #FFD7A2;
+    color:white;
+    text-align:center;
+    font-size:120%;
+    font-weight:bold;
+}
+.card-body{
+    height:20px;
+    text-align:center;
+    background-color:#FFBDA8;
+}
+.card{
+    margin-top:40px;
+}
+
+ul{
+    padding:0;
+    margin-bottom:-2px;
+}
+.list-group-item{
+    padding:0;
+    text-align:center;
+}
+img{
+    width:200px;
+    height:200px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
-
 import SmallCard from "../components/Small Card";
 import axios from "axios";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
@@ -24,7 +23,6 @@ class Dashboard extends Component {
         Authorization: `Bearer ${pass}`
     },
       params: {
-      categories: 'pubs',
       limit: 8
     }
     })
@@ -33,13 +31,6 @@ class Dashboard extends Component {
         isLoaded: true,
         data: res.data.businesses
       },()=>console.log(this.state))
-
-      // console.log(res.data)
-      // console.log(this.state)
-    })
-
-  }
-
   render() {
     const { error, isLoaded, data } = this.state;
     if (error) {
@@ -52,11 +43,11 @@ class Dashboard extends Component {
       <Container fluid>
         <Row>
         {data.map(place=>
-          <Col size="md-3">
+          <Col size="lg-3">
             {console.log(data)}
-
-              <SmallCard name={place.name} img={place.image_url} />
-
+            
+              <SmallCard name={place.name} img={place.image_url} id={place.id}/>
+            
           </Col>
           )}
         </Row>
