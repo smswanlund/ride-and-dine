@@ -1,0 +1,28 @@
+.btn-secondary {
+    background-color: #FFD7A2;
+    border-color:#FFD7A2;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px;
+}
+.btn-secondary:focus{
+    background-color:#EB6864;
+    border-color:#EB6864;
+    color: #FFD7A2;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.btn-secondary:hover{
+    background-color:#EB6864;
+    border-color:#EB6864;
+    color: #FFD7A2;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #151515;
+    text-decoration: none;
+    background-color: #EB6864;
+}
