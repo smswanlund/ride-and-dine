@@ -31,7 +31,9 @@ class Dashboard extends Component {
         isLoaded: true,
         data: res.data.businesses
       },()=>console.log(this.state))
-  render() {
+    })
+  }
+  render(){
     const { error, isLoaded, data } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
