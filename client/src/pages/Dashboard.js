@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
-import SmallCard from "../components/Small Cards";
+import SmallCard from "../components/Small Card";
 import axios from "axios";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 
@@ -24,7 +23,6 @@ class Dashboard extends Component {
         Authorization: `Bearer ${pass}`
     },
       params: {
-      
       limit: 8
     }
     })
@@ -33,14 +31,6 @@ class Dashboard extends Component {
         isLoaded: true,
         data: res.data.businesses
       },()=>console.log(this.state))
-   
-      // console.log(res.data)
-      // console.log(this.state)
-    })
-    
-  }
-  
-
   render() {
     const { error, isLoaded, data } = this.state;
     if (error) {
@@ -56,7 +46,7 @@ class Dashboard extends Component {
           <Col size="lg-3">
             {console.log(data)}
             
-              <SmallCard name={place.name} img={place.image_url} key={place.id}/>
+              <SmallCard name={place.name} img={place.image_url} id={place.id}/>
             
           </Col>
           )}
