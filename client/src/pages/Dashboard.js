@@ -24,7 +24,7 @@ class Dashboard extends Component {
         Authorization: `Bearer ${pass}`
     },
       params: {
-      categories: 'pubs',
+      
       limit: 8
     }
     })
@@ -39,6 +39,7 @@ class Dashboard extends Component {
     })
     
   }
+  
 
   render() {
     const { error, isLoaded, data } = this.state;
@@ -52,10 +53,10 @@ class Dashboard extends Component {
       <Container fluid>
         <Row>
         {data.map(place=>
-          <Col size="md-3">
+          <Col size="lg-3">
             {console.log(data)}
             
-              <SmallCard name={place.name} img={place.image_url} />
+              <SmallCard name={place.name} img={place.image_url} key={place.id}/>
             
           </Col>
           )}

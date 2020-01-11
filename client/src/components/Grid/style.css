@@ -1,5 +1,6 @@
 .container-fluid{
-    margin-top:20px;
-    margin-left:50px;
-    margin-right:50px;
+    padding-top:30px;
+    padding-left:10%;
+    padding-right:10%;
+    width:100vw;
 }

@@ -2,9 +2,13 @@ import React from "react";
 import "./style.css";
 export function SmallCard(props){
     return (
-        <div className="card">
+        <div className="card" id={props.id} >
             <div className="card-header">{props.name}</div>
-            <div className="card-body"><img src={props.img}  height={"200px"} /></div>
+            <ul>
+                <li className="list-group-item"><img src={props.img}  /></li>
+            </ul>
+
+            <div className="card-body"></div>
         </div>
     )
 }
