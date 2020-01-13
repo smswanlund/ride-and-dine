@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./pages/Dashboard";
 import Login from "./pages/Login";
-import Create from "./pages/CreateAccount";
+import Create from "./pages/createAccount";
 import NoMatch from "./pages/404";
 import Nav from "./components/Nav";
 

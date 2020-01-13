@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { RadiusDropDown } from "../components/RadiusDropDown/index.js"; ///maybe take this out
-import SmallCard from "../components/Small Card";
+import SmallCard from "../components/Small Cards";
 import "../components/RadiusDropDown/style.css"
 import axios from "axios";
+// import { geolocated } from "react-geolocated";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
+let lat='';
+let lng='';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -15,7 +18,8 @@ class Dashboard extends Component {
       data: [],
       distance: "",
       showMenu: false,
-      value: 1000
+      value: 1000,
+      location:false
     };
 
    this.handleChange=this.handleChange.bind(this);
@@ -23,16 +27,31 @@ class Dashboard extends Component {
     
     }
   componentDidMount() {
-    
-    this.searchRes(this.state.value);
-
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
+      
+    }
+    else{
+      
+    }
+  
+  }
+  displayLocationInfo=position=>{
+    lng = position.coords.longitude;
+    lat = position.coords.latitude;
+    this.setState({
+      location:true
+    })
+    this.searchRes(8047)
   }
   searchRes(radius) {
-    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=Richmond`, {
+    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?`, {
       headers: {
         Authorization: `Bearer ${pass}`
     },
       params: {
+      latitude: lat,
+      longitude: lng,
       rating: 5,
       categories: 'food, ALL',
       limit: 8,
@@ -54,14 +73,14 @@ class Dashboard extends Component {
   }
 
   render() {
-    
-    console.log("dashboard" + this.state.value)
-    const { error, isLoaded, data } = this.state;
+    const { error, isLoaded, data, location } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
-    }   else if (!isLoaded) {
-      return <div>Loading...</div>;
-    }  else { 
+    }else if(!location){
+      return <div>You must enable location</div>
+    }  else if(!isLoaded){
+      return <div>Loading</div> 
+    } else{
 
     return (
 
@@ -73,10 +92,7 @@ class Dashboard extends Component {
         <Row>
         {data.map(place=>
           <Col size="md-3">
-            {console.log(data)}
-
               <SmallCard name={place.name} img={place.image_url} />
-
           </Col>
           )}
         </Row>
