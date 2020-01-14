@@ -1,14 +1,17 @@
 .big-card{
     margin:auto;
-    width:70%;
+    width:80vh;
     height:70vh;
+    border-radius: 39px;
+    
 }
 
 .big-picture{
     height:50vh;
     width:50vh;
 }
-.big-header{
+.big-header:first-child{
+    border-radius: 39px 39px 0 0;
     height:100px;
     font-size:200%;
 }
@@ -18,4 +21,33 @@
     background-color:#FFBDA8;
     position:relative;
     bottom:0;
+    border-radius: 0 0 39px 39px;
 }
+.close-card{
+    float:right;
+}
+.reviews{
+    width:33%;
+    height: 100%;
+    float:left;
+    padding-top:20px;
+    border-radius:0 0 0 39px;
+    border-right:solid black 1px;
+}
+.delivery{
+    width:34%;
+    height: 100%;
+    float:left;
+    padding-top:20px;
+    border-right:solid black 1px;
+    border-left:solid black 1px;
+}
+.rides{
+    width:33%;
+    height: 100%;
+    float:left;
+    padding-top:20px;
+    border-left:solid black 1px;
+    
+}
+

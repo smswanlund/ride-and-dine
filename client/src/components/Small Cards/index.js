@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useSpring, animated } from "react-spring";
+import React from "react";
 import "./style.css";
 
 
@@ -8,7 +7,7 @@ export const SmallCard = (stuff) => {
 
   return (
    
-   <div className="card">
+   <div className="card" onClick={stuff.toggle}>
           <div className="card-header">{stuff.name}</div>
           <ul>
           <li className="list-group-item"><img src={stuff.img} alt={stuff.name+" picture from yelp"} /></li>
