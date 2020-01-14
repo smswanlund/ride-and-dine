@@ -3,6 +3,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { RadiusDropDown } from "../components/RadiusDropDown/index.js"; ///maybe take this out
 import SmallCard from "../components/Small Cards";
 import "../components/RadiusDropDown/style.css"
+import { CategoryButton } from "../components/CategoryButton/index.js"
 import axios from "axios";
 // import { geolocated } from "react-geolocated";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
@@ -14,15 +15,17 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       error: null,
-      isLoaded: false,
+      isLoading: true,
       data: [],
-      distance: "",
-      showMenu: false,
-      value: 1000,
+      //distance: "",
+      //showMenu: false,
+      name: "all",
+      value: 10000,
       location:false
     };
 
    this.handleChange=this.handleChange.bind(this);
+   this.handleCategoryChange=this.handleCategoryChange.bind(this);
     this.searchRes=this.searchRes.bind(this); 
     
     }
@@ -42,9 +45,9 @@ class Dashboard extends Component {
     this.setState({
       location:true
     })
-    this.searchRes(8047)
+    this.searchRes(this.state.value, this.state.name);
   }
-  searchRes(radius) {
+  searchRes(name) {
     axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?`, {
       headers: {
         Authorization: `Bearer ${pass}`
@@ -53,15 +56,17 @@ class Dashboard extends Component {
       latitude: lat,
       longitude: lng,
       rating: 5,
-      categories: 'food, ALL',
+      categories: name,
       limit: 8,
-      radius: radius
+      radius: this.state.value
     }
     })
     .then((res) => {
       this.setState({
-        isLoaded: true,
-        data: res.data.businesses
+        isLoading: false,
+        data: res.data.businesses,
+        value: this.state.value,
+        name: this.state.name
       },()=>console.log(this.state))
     })
 
@@ -72,13 +77,19 @@ class Dashboard extends Component {
     this.setState({ value: newValue } )
   }
 
+  handleCategoryChange = (newName) => {
+    this.searchRes((newName),
+    this.setState({ name: newName } ))
+    
+  } 
+
   render() {
-    const { error, isLoaded, data, location } = this.state;
+    const { error, isLoading, data, location } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     }else if(!location){
       return <div>You must enable location</div>
-    }  else if(!isLoaded){
+    }  else if(isLoading){
       return <div>Loading</div> 
     } else{
 
@@ -88,7 +99,7 @@ class Dashboard extends Component {
       <Container fluid>
         
         <RadiusDropDown  value={this.state.value} handleChange={this.handleChange} />
-
+        <CategoryButton  name={this.state.name} onClick={this.handleCategoryChange} />
         <Row>
         {data.map(place=>
           <Col size="md-3">
