@@ -20,18 +20,10 @@ class Dashboard extends Component {
       error: null,
       isLoading: true,
       data: [],
-<<<<<<< HEAD
-      name: "all",
-      value: 10000,
-      location:false
-=======
-      //distance: "",
-      //showMenu: false,
       name: "all",
       value: 10000,
       location:false,
       width: window.innerWidth || document.documentElement.clientWidth
->>>>>>> 9af23edf464e44acdbf22ca4c576d37b861c5336
     };
   
    this.handleChange=this.handleChange.bind(this);
@@ -115,6 +107,9 @@ class Dashboard extends Component {
         
         <RadiusDropDown  value={this.state.value} handleChange={this.handleChange} />
         <CategoryButton  name={this.state.name} onClick={this.handleCategoryChange} />
+        
+        <a className="btn-btn"  href="https://m.uber.com/ul/?action=setPickup&client_id=lK4eQqhizA2dFcgORkCRvI6pdkgfQhyt&pickup=my_location&dropoff[formatted_address]=Richmond%2C%20VA%2C%20USA&dropoff[latitude]=37.540725&dropoff[longitude]=-77.436048">UBER BTN</a>
+       {/* this is just a link, we can make  it its own component and update the latitude and longitude at the end of the link */}
         <Grid
         className="grid"
         // Arbitrary data, should contain keys, possibly heights, etc.
