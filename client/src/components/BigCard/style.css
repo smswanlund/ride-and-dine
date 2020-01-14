@@ -1,0 +1,21 @@
+.big-card{
+    margin:auto;
+    width:70%;
+    height:70vh;
+}
+
+.big-picture{
+    height:50vh;
+    width:50vh;
+}
+.big-header{
+    height:100px;
+    font-size:200%;
+}
+.big-bottom{
+    height:100px;
+    text-align:center;
+    background-color:#FFBDA8;
+    position:relative;
+    bottom:0;
+}
