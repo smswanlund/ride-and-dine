@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { RadiusDropDown } from "../components/RadiusDropDown/index.js"; ///maybe take this out
 import SmallCard from "../components/Small Cards";
@@ -20,19 +20,12 @@ class Dashboard extends Component {
       error: null,
       isLoading: true,
       data: [],
-<<<<<<< HEAD
-      distance: "",
-      showMenu: false,
-      value: 1000,
-      location:false,
-      open:false
-=======
       //distance: "",
       //showMenu: false,
       name: "all",
       value: 10000,
-      location:false
->>>>>>> bb06f8ecf78ed017c5aeb9eb790e89de211a8705
+      location:false,
+      width: window.innerWidth || document.documentElement.clientWidth
     };
   
    this.handleChange=this.handleChange.bind(this);
@@ -40,7 +33,11 @@ class Dashboard extends Component {
     this.searchRes=this.searchRes.bind(this); 
     
     }
+  updateWidth=()=>{
+    this.setState({width:window.innerWidth || document.getElementById.clientWidth})
+  }
   componentDidMount() {
+    window.addEventListener("resize",this.updateWidth());
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
       
@@ -95,6 +92,7 @@ class Dashboard extends Component {
   } 
 
   render() {
+    
     const { error, isLoading, data, location } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -111,13 +109,6 @@ class Dashboard extends Component {
         
         <RadiusDropDown  value={this.state.value} handleChange={this.handleChange} />
         <CategoryButton  name={this.state.name} onClick={this.handleCategoryChange} />
-        <Row>
-        {/* {data.map(place=>
-          <Col size="md-3">
-              <SmallCard name={place.name} img={place.image_url} />
-          </Col>
-          )} */}
-        </Row>
         <Grid
         className="grid"
         // Arbitrary data, should contain keys, possibly heights, etc.
@@ -127,17 +118,15 @@ class Dashboard extends Component {
         // Can be a fixed value or an individual data accessor
         heights={400}
         // Number of columns
-        columns={4}>
+        columns={this.state.width>640 ? 4 : 1}>
+          
         {(data, maximized, toggle) => (
          
-          <div
-            className="cell"
-            style={{ backgroundImage: data.css }}
-            onClick={toggle}>
+          <div className="cell">
             {maximized && (
-              <BigCard name={data.name} img={data.image_url} />
+              <BigCard name={data.name} img={data.image_url} toggle={toggle} />
             )}
-            {!maximized && <SmallCard name={data.name} img={data.image_url} />}
+            {!maximized && <SmallCard name={data.name} img={data.image_url} toggle={toggle} />}
           </div>
         )}
       </Grid>

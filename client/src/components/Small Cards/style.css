@@ -4,20 +4,20 @@
     text-align:center;
     font-size:120%;
     font-weight:bold;
+    height: 60px;
+    padding:auto 0;
 }
 .card-bottom{
-    height:20px;
+    height:50px;
     text-align:center;
     background-color:#FFBDA8;
 }
 .card{
-    margin-top:40px;
-    
+    margin:10px 10px;
+    z-index:0;
     transition: .1s;
 }
-.card:hover{
-    z-index: 500;
-}
+
 ul{
     padding:0;
     margin-bottom:-2px;
