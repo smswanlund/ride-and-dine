@@ -5,11 +5,16 @@ import Login from "./pages/Login";
 import Create from "./pages/createAccount";
 import NoMatch from "./pages/404";
 import Nav from "./components/Nav";
+import {useSpring, animated} from "react-spring";
+
+
 
 function App() {
+  
   return (
     <Router>
       <div>
+      
         <Nav />
         <Switch>
           <Route exact path="/" component={Main} />
@@ -21,6 +26,7 @@ function App() {
       </div>
     </Router>
   );
+
 }
 
 export default App;

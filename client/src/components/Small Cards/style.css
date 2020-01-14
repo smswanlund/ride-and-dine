@@ -12,8 +12,12 @@
 }
 .card{
     margin-top:40px;
+    
+    transition: .1s;
 }
-
+.card:hover{
+    z-index: 500;
+}
 ul{
     padding:0;
     margin-bottom:-2px;
