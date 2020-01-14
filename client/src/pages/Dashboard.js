@@ -20,19 +20,9 @@ class Dashboard extends Component {
       error: null,
       isLoading: true,
       data: [],
-<<<<<<< HEAD
-      distance: "",
-      showMenu: false,
-      value: 1000,
-      location:false,
-      open:false
-=======
-      //distance: "",
-      //showMenu: false,
       name: "all",
       value: 10000,
       location:false
->>>>>>> bb06f8ecf78ed017c5aeb9eb790e89de211a8705
     };
   
    this.handleChange=this.handleChange.bind(this);
