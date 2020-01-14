@@ -76,14 +76,14 @@ import "./style.css";
           aria-labelledby="dropdownMenuButton"
           
           >
-            <a className="dropdown-item" href="#nogo" value={2000} onClick={(e)=> this.select(e)}>
+            <a className="dropdown-item" href="#nogo" value={1609} onClick={(e)=> this.select(e)}>
               1 mile
             </a>
-            <a className="dropdown-item" href="#nogo" value={4000} onClick={(e)=> this.select(e)}>
-              2 miles
-            </a>
-            <a className="dropdown-item" href="#nogo" value={9000} onClick={(e)=> this.select(e)}>
+            <a className="dropdown-item" href="#nogo" value={8046} onClick={(e)=> this.select(e)}>
               5 miles
+            </a>
+            <a className="dropdown-item" href="#nogo" value={16093} onClick={(e)=> this.select(e)}>
+              10 miles
             </a>
           </div>
         </div>
