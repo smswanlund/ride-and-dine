@@ -27,3 +27,6 @@
     background-color: #EB6864;
     z-index:10000000000;
 }
+.dropdown-menu{
+    z-index:5000;
+}
