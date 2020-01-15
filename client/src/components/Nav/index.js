@@ -4,7 +4,7 @@ import "./style.css";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-blue">
       <a className="navbar-brand" href="/">
         Ride and Dine
       </a>

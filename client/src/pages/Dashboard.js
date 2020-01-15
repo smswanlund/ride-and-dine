@@ -23,7 +23,7 @@ class Dashboard extends Component {
       //distance: "",
       //showMenu: false,
       name: "all",
-      value: 10000,
+      value: 8046,
       location:false,
       width: window.innerWidth || document.documentElement.clientWidth
     };
@@ -64,9 +64,11 @@ class Dashboard extends Component {
       latitude: lat,
       longitude: lng,
       rating: 5,
-      categories: name,
+      categories: this.state.name,
       limit: 8,
-      radius: this.state.value
+      radius: this.state.value,
+      sort_by:"rating",
+      term:"food"
     }
     })
     .then((res) => {
@@ -109,6 +111,7 @@ class Dashboard extends Component {
         
         <RadiusDropDown  value={this.state.value} handleChange={this.handleChange} />
         <CategoryButton  name={this.state.name} onClick={this.handleCategoryChange} />
+        
         <Grid
         className="grid"
         // Arbitrary data, should contain keys, possibly heights, etc.
@@ -118,13 +121,13 @@ class Dashboard extends Component {
         // Can be a fixed value or an individual data accessor
         heights={400}
         // Number of columns
-        columns={this.state.width>640 ? 4 : 1}>
+        columns={this.state.width>640 ? (this.state.width>1080 ? 4 : 2) : 1}>
           
         {(data, maximized, toggle) => (
          
           <div className="cell">
             {maximized && (
-              <BigCard name={data.name} img={data.image_url} toggle={toggle} />
+              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} />
             )}
             {!maximized && <SmallCard name={data.name} img={data.image_url} toggle={toggle} />}
           </div>
