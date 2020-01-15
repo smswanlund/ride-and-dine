@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 import { RadiusDropDown } from "../components/RadiusDropDown/index.js"; ///maybe take this out
 import SmallCard from "../components/Small Cards";
 import "../components/RadiusDropDown/style.css"
@@ -77,7 +77,7 @@ class Dashboard extends Component {
         data: res.data.businesses,
         value: this.state.value,
         name: this.state.name
-      },()=>console.log(this.state))
+      },()=>(console.log(res)))
     })
 
   }

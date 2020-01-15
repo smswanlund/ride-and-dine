@@ -70,7 +70,7 @@ import "./style.css";
             aria-haspopup="true"
            
           >
-            Radius: {this.props.value==8046 ? "5 mi" : (this.props.value==1609 ? "1 mi" : "10 mi")}
+            Radius: {this.props.value===8046 ? "5 mi" : (this.props.value===1609 ? "1 mi" : "10 mi")}
           </button>
           <div 
           className={menuClass} 
