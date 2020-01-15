@@ -34,8 +34,8 @@ export class CategoryButton extends React.Component {
 
 
   select(event) {
-    console.log(event.target.getAttribute("name"))
-    this.props.onClick(event.target.getAttribute("name"))
+    this.props.onClick(event.target.getAttribute("name"));
+    console.log(event.target.getAttribute("name"));
   } 
     render() {
        
