@@ -1,12 +1,55 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
+import { loginUser } from "../actions/authActions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
-class Detail extends Component {
- 
- componentDidMount() {
+class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user_email: "",
+      password: "",
+      errors: {}
+    };
+  }
+  componentDidMount() {
+    // If logged in and user navigates to Login page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const userData = {
+      email: this.state.user_email,
+      password: this.state.password
+    };
+
+    this.props.loginUser(userData);
+  };
+
   render() {
+    const { errors } = this.state;
     return (
       <Container fluid className="align-center">
         <Row>
@@ -18,16 +61,34 @@ class Detail extends Component {
                 <div className="form-group row" >
                     <label for="user/email" className="col-sm-2">Username/<br />Email</label>
                     <div className="col-sm-9">
-                      <input type="text" id="user/email" className="form-control" />
+                      <input
+                        onChange={this.onChange}
+                        value={this.state.email}
+                        error={errors.email}
+                        id="user_email"
+                        type="text"
+                        className={classnames("", {
+                          invalid: errors.email || errors.emailnotfound
+                        })}
+                      />
                     </div>
                 </div>
                 <div className="form-group row" >
                     <label for="password" className="col-sm-2">Password</label>
                     <div className="col-sm-9">
-                      <input type="password" id="password" className="form-control" />
+                      <input
+                        onChange={this.onChange}
+                        value={this.state.password}
+                        error={errors.password}
+                        id="password"
+                        type="password"
+                        className={classnames("", {
+                        invalid: errors.password || errors.passwordincorrect
+                        })}
+                      />
                     </div>
                 </div>
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary" onClick={this.onSubmit}>Login</button>
                 <hr />
                 Don't have an account? <a href="createaccount">Create One Here</a>
               </div>
@@ -38,5 +99,18 @@ class Detail extends Component {
     );
   }
 }
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
 
-export default Detail;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);

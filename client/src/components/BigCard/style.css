@@ -1,12 +1,18 @@
 .card_button{
-    margin:auto auto;
-    vertical-align: middle;
-    top:30%;
-    position:relative;
+    height:100%;
+    width:100%;
+    border-radius:39px;
+    padding-top: 15%;
+    font-size: 100%;
+    
 }
 
 .btn-outline-success:hover{
     color:white;
+
+}
+.big-card-back{
+    top:-70vh;
 }
 a:not([href]){
     color:black;
@@ -23,6 +29,12 @@ body{
     font-weight: bold;
     color: white;
 }
+
+.aReview{
+    border-radius:20px;
+    border:solid black 1px;
+    margin:20px;
+}
 @media screen and (min-width:1080px) {
 body{
     overflow-y: hidden;
@@ -35,8 +47,9 @@ body{
     
     
 }
-.big-card-back{
-    top:-70vh;
+.review-container{
+    height:50vh;
+    overflow-y: scroll;
 }
 .big-picture{
     height:50vh;
@@ -55,6 +68,9 @@ body{
     position:relative;
     bottom:0;
     border-radius: 0 0 39px 39px;
+    display: block;
+    /* vertical-align: middle; */
+    /* width:100%; */
 }
 .close-card{
     float:right;
@@ -112,6 +128,12 @@ body{
         position:relative;
         bottom:0;
         border-radius: 0 0 39px 39px;
+        display: block;
+        /* vertical-align: middle; */
+    }
+    .review-container{
+        height:50vh;
+        overflow-y: scroll;
     }
     .close-card{
         float:right;
@@ -140,6 +162,7 @@ body{
         border-left:solid black 1px;
         
     }
+    
     
     }
     
