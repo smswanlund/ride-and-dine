@@ -1,12 +1,43 @@
+.card_button{
+    margin:auto auto;
+    vertical-align: middle;
+    top:30%;
+    position:relative;
+}
+
+.btn-outline-success:hover{
+    color:white;
+}
+a:not([href]){
+    color:black;
+}
+/* a:not([href]):hover{
+    color:white;
+    text-shadow: -.1px -.1px 0 #000, .1px -.1px 0 #000, -.1px .1px 0 #000, .1px .1px 0 #000;
+} */
+body{
+    text-shadow: -.5px -.5px 0 #000, .5px -.5px 0 #000, -.5px .5px 0 #000, .5px .5px 0 #000;
+}
+.nav-link{
+    /* text-shadow: 0 0 0; */
+    font-weight: bold;
+    color: white;
+}
 @media screen and (min-width:1080px) {
+body{
+    overflow-y: hidden;
+}
 .big-card{
     margin:auto;
     max-width: 40vw;
     height:70vh;
     border-radius: 39px;
     
+    
 }
-
+.big-card-back{
+    top:-70vh;
+}
 .big-picture{
     height:50vh;
     width:50vh;
@@ -32,7 +63,7 @@
     width:33%;
     height: 100%;
     float:left;
-    padding-top:20px;
+    vertical-align: middle;
     border-radius:0 0 0 39px;
     border-right:solid black 1px;
 }
@@ -40,7 +71,7 @@
     width:34%;
     height: 100%;
     float:left;
-    padding-top:20px;
+    
     border-right:solid black 1px;
     border-left:solid black 1px;
 }
@@ -48,7 +79,7 @@
     width:33%;
     height: 100%;
     float:left;
-    padding-top:20px;
+    
     border-left:solid black 1px;
     
 }

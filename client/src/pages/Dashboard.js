@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 import { RadiusDropDown } from "../components/RadiusDropDown/index.js"; ///maybe take this out
 import SmallCard from "../components/Small Cards";
 import "../components/RadiusDropDown/style.css"
@@ -20,10 +20,8 @@ class Dashboard extends Component {
       error: null,
       isLoading: true,
       data: [],
-      //distance: "",
-      //showMenu: false,
       name: "all",
-      value: 8046,
+      value: "8046",
       location:false,
       width: window.innerWidth || document.documentElement.clientWidth
     };
@@ -38,15 +36,10 @@ class Dashboard extends Component {
   }
   componentDidMount() {
     window.addEventListener("resize",this.updateWidth());
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
-      
-    }
-    else{
-      
-    }
-  
+    navigator.geolocation?(navigator.geolocation.getCurrentPosition(this.displayLocationInfo)):(console.log("oof1"))
+    this.state.location?(this.searchRes()):(console.log("oof"));
   }
+ 
   displayLocationInfo=position=>{
     lng = position.coords.longitude;
     lat = position.coords.latitude;
@@ -77,19 +70,18 @@ class Dashboard extends Component {
         data: res.data.businesses,
         value: this.state.value,
         name: this.state.name
-      },()=>console.log(this.state))
+      },()=>(console.log(this.state.data)))
     })
 
   }
   
   handleChange = (newValue) => {
-    this.searchRes(newValue)
-    this.setState({ value: newValue } )
+    this.setState({ value: newValue },()=>(this.searchRes(newValue)) )
+    
   }
 
   handleCategoryChange = (newName) => {
-    this.searchRes((newName),
-    this.setState({ name: newName } ))
+    this.setState({ name: newName },()=>(this.searchRes()));
     
   } 
 
@@ -111,13 +103,13 @@ class Dashboard extends Component {
         
         <RadiusDropDown  value={this.state.value} handleChange={this.handleChange} />
         <CategoryButton  name={this.state.name} onClick={this.handleCategoryChange} />
-        
-        <Grid
+        {data.length>0?
+        (<Grid
         className="grid"
         // Arbitrary data, should contain keys, possibly heights, etc.
         data={data}
         // Key accessor, instructs grid on how to fet individual keys from the data set
-        keys={d => d.name}
+        keys={d => d.id}
         // Can be a fixed value or an individual data accessor
         heights={400}
         // Number of columns
@@ -127,12 +119,12 @@ class Dashboard extends Component {
          
           <div className="cell">
             {maximized && (
-              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} />
+              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} rating={data.rating} />
             )}
             {!maximized && <SmallCard name={data.name} img={data.image_url} toggle={toggle} />}
           </div>
         )}
-      </Grid>
+      </Grid>) : (<div className="notFound">No results found</div>)}
       </Container>
       
     );

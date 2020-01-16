@@ -39,3 +39,7 @@ img{
 .container-fluid{
     height:90vh;
 }
+.notFound{
+    display:block;
+    width: 100%;
+}
