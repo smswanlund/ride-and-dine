@@ -16,7 +16,7 @@ import StarRating from "../StarRating";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 let reviews = [];
 export const BigCard = (stuff) => {
-  Axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
+  Axios.get(`${'http://localhost:8080/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
     Authorization: `Bearer ${pass}`
 }}).then((res)=>{reviews=res.data.reviews;
 console.log(reviews)})
@@ -75,8 +75,16 @@ console.log(reviews)})
       >
         {/* Show rating only if the card is selected */}
         {selected===1 && (
-          <StarRating rating={currentRating} setRating={setRating} />
-        )}
+            <div>
+          <div className="big-header card-header">{stuff.name}<button className="btn btn-outline-danger close-card"  onClick={stuff.toggle}>X</button></div>
+          <ul>
+          <li className="list-group-item review-container">{reviews.map((review)=>(<div className="aReview">
+              <StarRating rating={review.rating} setRating={setRating} />
+          <div>{review.text.indexOf("...")!==-1?(<div>{review.text.substring(0,review.text.length-3)}<a href={review.url}>...</a></div>) :review.text}</div></div>)
+          )}</li>
+      </ul>
+      <div className="big-bottom"><div className="reviews"><a className="btn btn-outline-danger card_button" onClick={()=>setSelected(0)}>Back to Info</a></div><div className="delivery"><a className="btn btn-outline-warning card_button">Get it Delivered</a></div><div className="rides"><a className="btn btn-outline-success card_button">Get a Ride</a></div></div>
+      </div>)}
       </animated.div>
     </animated.div>
   );

@@ -7,6 +7,10 @@
 
 .btn-outline-success:hover{
     color:white;
+
+}
+.big-card-back{
+    top:-70vh;
 }
 a:not([href]){
     color:black;
@@ -23,6 +27,14 @@ body{
     font-weight: bold;
     color: white;
 }
+.review-container{
+    height:50vh;
+}
+.aReview{
+    border-radius:20px;
+    border:solid black 1px;
+    margin:20px;
+}
 @media screen and (min-width:1080px) {
 body{
     overflow-y: hidden;
@@ -35,9 +47,7 @@ body{
     
     
 }
-.big-card-back{
-    top:-70vh;
-}
+
 .big-picture{
     height:50vh;
     width:50vh;
