@@ -22,10 +22,10 @@ export const BigCard = (stuff) => {
 console.log(reviews)})
   // Hold state for selection and rating
   const [selected, setSelected] = useState(0);
-  const [currentRating, setRating] = useState(stuff.rating);
+  const [setRating] = useState(stuff.rating);
 
   // Card tilt
-  const [props, set] = useSpring(() => ({
+  const [props] = useSpring(() => ({
     state: [0, 0, 1]
   }));
 
@@ -60,7 +60,7 @@ console.log(reviews)})
           <ul>
           <li className="list-group-item"><img className="big-picture" src={stuff.img} alt={stuff.name+" picture from yelp"} /></li>
       </ul>
-      <div className="big-bottom"><div className="reviews"><a className="btn btn-outline-danger card_button" onClick={()=>setSelected(1)}>Read the Reviews</a></div><div className="delivery"><a className="btn btn-outline-warning card_button">Get it Delivered</a></div><div className="rides"><a className="btn btn-outline-success card_button">Get a Ride</a></div></div>
+      <div className="big-bottom"><div className="reviews"><a href="javacript:" className="btn btn-outline-danger card_button" onClick={()=>setSelected(1)}>Read the Reviews</a></div><div className="delivery"><a className="btn btn-outline-warning card_button">Get it Delivered</a></div><div className="rides"><a className="btn btn-outline-success card_button">Get a Ride</a></div></div>
 
       </animated.div>
       {/* Back */}

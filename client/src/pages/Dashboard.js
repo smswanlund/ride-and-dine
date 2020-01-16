@@ -43,6 +43,7 @@ class Dashboard extends Component {
   displayLocationInfo=position=>{
     lng = position.coords.longitude;
     lat = position.coords.latitude;
+    console.log(lat+","+lng)
     this.setState({
       location:true
     })
@@ -111,6 +112,7 @@ class Dashboard extends Component {
         // Key accessor, instructs grid on how to fet individual keys from the data set
         keys={d => d.id}
         // Can be a fixed value or an individual data accessor
+        lockScroll={true}
         heights={400}
         // Number of columns
         columns={this.state.width>640 ? (this.state.width>1080 ? 4 : 2) : 1}>
