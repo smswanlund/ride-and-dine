@@ -11,9 +11,9 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
-if (localStorage.jwtToken) {
+if (sessionStorage.jwtToken) {
   // Set auth token header auth
-  const token = localStorage.jwtToken;
+  const token = sessionStorage.jwtToken;
   setAuthToken(token);
   // Decode token and get user info and exp
   const decoded = jwt_decode(token);
@@ -24,7 +24,7 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     // Logout user
     store.dispatch(logoutUser());
-
+    sessionStorage.clear();
     // Redirect to login
     window.location.href = "./login";
   }
