@@ -16,7 +16,7 @@ import StarRating from "../StarRating";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 let reviews = [];
 export const BigCard = (stuff) => {
-  Axios.get(`${'http://localhost:8080/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
+  Axios.get(`${'http://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
     Authorization: `Bearer ${pass}`
 }}).then((res)=>{reviews=res.data.reviews;
 console.log(reviews)})
