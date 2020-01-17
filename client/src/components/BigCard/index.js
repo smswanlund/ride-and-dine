@@ -16,7 +16,7 @@ import StarRating from "../StarRating";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 let reviews = [];
 export const BigCard = (stuff) => {
-  Axios.get(`${'http://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
+  Axios.get(`${'http://localhost:8080/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
     Authorization: `Bearer ${pass}`
 }}).then((res)=>{reviews=res.data.reviews;
 console.log(reviews)})
@@ -60,7 +60,11 @@ console.log(reviews)})
           <ul>
           <li className="list-group-item"><img className="big-picture" src={stuff.img} alt={stuff.name+" picture from yelp"} /></li>
       </ul>
-      <div className="big-bottom"><div className="reviews"><a href="javacript:" className="btn btn-outline-danger card_button" onClick={()=>setSelected(1)}>Read the Reviews</a></div><div className="delivery"><a className="btn btn-outline-warning card_button">Get it Delivered</a></div><div className="rides"><a className="btn btn-outline-success card_button">Get a Ride</a></div></div>
+        <div className="big-bottom">
+          <div className="reviews card_block"><a href="javacript:" className="btn btn-outline-danger card_button reviews" onClick={()=>setSelected(1)}>Read the Reviews</a></div>
+          <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
+          <div className="rides card_block"><a className="btn btn-outline-success card_button rides">Get a Ride</a></div>
+        </div>
 
       </animated.div>
       {/* Back */}
@@ -83,7 +87,11 @@ console.log(reviews)})
           <div>{review.text.indexOf("...")!==-1?(<div>{review.text.substring(0,review.text.length-3)}<a href={review.url}>...</a></div>) :review.text}</div></div>)
           )}</li>
       </ul>
-      <div className="big-bottom"><div className="reviews"><a className="btn btn-outline-danger card_button" onClick={()=>setSelected(0)}>Back to Info</a></div><div className="delivery"><a className="btn btn-outline-warning card_button">Get it Delivered</a></div><div className="rides"><a className="btn btn-outline-success card_button">Get a Ride</a></div></div>
+      <div className="big-bottom">
+          <div className="reviews card_block"><a href="javacript:" className="btn btn-outline-danger card_button reviews" onClick={()=>setSelected(0)}>Back to Info</a></div>
+          <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
+          <div className="rides card_block"><a className="btn btn-outline-success card_button rides">Get a Ride</a></div>
+        </div>
       </div>)}
       </animated.div>
     </animated.div>

@@ -60,17 +60,18 @@ router.post("/login", (req, res) => {
   // Form validation
 
   const { errors, isValid } = validateLoginInput(req.body);
-
+  console.log(req.body)
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
+  const user_email = req.body.user_email;
   const password = req.body.password;
 
   // Find user by email
-  User.findOne({ email }).then(user => {
+  if(user_email.indexOf("@")!==-1){
+  User.findOne({ email: user_email }).then(user => {
     // Check if user exists
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
@@ -106,7 +107,48 @@ router.post("/login", (req, res) => {
           .json({ passwordincorrect: "Password incorrect" });
       }
     });
-  });
+  })}
+  else{
+    User.findOne({ username: user_email }).then(user => {
+      // Check if user exists
+      console.log("maybe its bad")
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Username not found" });
+      }
+  
+      // Check password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          // User matched
+          // Create JWT Payload
+          const payload = {
+            id: user.id,
+            name: user.name
+          };
+  
+          // Sign token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            {
+              expiresIn: 31556926 // 1 year in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token,
+                name:payload.name
+              });
+            }
+          );
+        } else {
+          return res
+            .status(400)
+            .json({ passwordincorrect: "Password incorrect" });
+        }
+      });
+    })
+  }
 });
 
 module.exports = router;

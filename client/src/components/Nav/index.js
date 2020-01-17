@@ -17,7 +17,7 @@ function Nav() {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         
-          {!localStorage.jwtToken?(
+          {!sessionStorage.jwtToken?(
             <div className="navbar-nav">
           <NavLink exact to="/" className="nav-link" activeClassName="hidden">Home</NavLink>
           <NavLink exact to="/createaccount" className="nav-link" activeClassName="hidden">Create Account</NavLink>
@@ -27,7 +27,7 @@ function Nav() {
           ( 
              <div className="navbar-nav">
             <NavLink exact to="/" className="nav-link" activeClassName="hidden">Home</NavLink>
-            <NavLink exact to="#" className="nav-link" onClick={logoutUser()}>Logout</NavLink>
+          <NavLink exact to="#" className="nav-link" onClick={logoutUser()}>Logout (Hi {sessionStorage.name})</NavLink>
             </div>
           )} 
         
