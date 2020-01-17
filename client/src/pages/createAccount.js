@@ -129,6 +129,8 @@ class Register extends Component {
       </Container>
     );
   }
+
+  
 }
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
