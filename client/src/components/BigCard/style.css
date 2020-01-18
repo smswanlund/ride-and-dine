@@ -53,8 +53,8 @@ body{
     overflow-y: scroll;
 }
 .big-picture{
-    height:50vh;
-    width:50vh;
+    height:40vh;
+    width:40vh;
     max-width: 100vw;
 }
 .big-header:first-child{
