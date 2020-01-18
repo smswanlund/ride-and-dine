@@ -50,7 +50,7 @@ class Dashboard extends Component {
     this.searchRes(this.state.value, this.state.name);
   }
   searchRes(name) {
-    axios.get(`${'http://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?`, {
+    axios.get(`${'http://localhost:8080/'}https://api.yelp.com/v3/businesses/search?`, {
       headers: {
         Authorization: `Bearer ${pass}`
     },
@@ -121,7 +121,7 @@ class Dashboard extends Component {
          
           <div className="cell">
             {maximized && (
-              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} rating={data.rating} />
+              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} rating={data.rating} phone={[data.display_phone,data.phone]} address={data.location.display_address} />
             )}
             {!maximized && <SmallCard name={data.name} img={data.image_url} toggle={toggle} />}
           </div>
