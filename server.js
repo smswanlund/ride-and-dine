@@ -9,6 +9,7 @@ const users = require("./routes/api/users");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -17,17 +18,24 @@ if (process.env.NODE_ENV === "production") {
 const db = require("./config/keys").mongoURI;
 app.use(passport.initialize());
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
+  .connect(db,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
   app.use(passport.initialize());
   require("./config/passport")(passport);
+
 app.use("/api/users", users);
+
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || db);
+mongoose.connect(process.env.MONGODB_URI || db,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
 
 // Start the API server
 app.listen(PORT, function() {
