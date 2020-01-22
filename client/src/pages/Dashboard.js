@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 import { RadiusDropDown } from "../components/RadiusDropDown/index.js"; ///maybe take this out
 import SmallCard from "../components/Small Cards";
 import "../components/RadiusDropDown/style.css"
@@ -21,7 +21,7 @@ class Dashboard extends Component {
       isLoading: true,
       data: [],
       name: "all",
-      value: 10000,
+      value: "8046",
       location:false,
       width: window.innerWidth || document.documentElement.clientWidth
     };
@@ -36,25 +36,21 @@ class Dashboard extends Component {
   }
   componentDidMount() {
     window.addEventListener("resize",this.updateWidth());
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
-      
-    }
-    else{
-      
-    }
-  
+    navigator.geolocation?(navigator.geolocation.getCurrentPosition(this.displayLocationInfo)):(console.log("oof1"))
+    this.state.location?(this.searchRes()):(console.log("oof"));
   }
+ 
   displayLocationInfo=position=>{
     lng = position.coords.longitude;
     lat = position.coords.latitude;
+    console.log(lat+","+lng)
     this.setState({
       location:true
     })
     this.searchRes(this.state.value, this.state.name);
   }
   searchRes(name) {
-    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?`, {
+    axios.get(`${'https://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?`, {
       headers: {
         Authorization: `Bearer ${pass}`
     },
@@ -62,9 +58,11 @@ class Dashboard extends Component {
       latitude: lat,
       longitude: lng,
       rating: 5,
-      categories: name,
+      categories: this.state.name,
       limit: 8,
-      radius: this.state.value
+      radius: this.state.value,
+      sort_by:"rating",
+      term:"food"
     }
     })
     .then((res) => {
@@ -73,19 +71,18 @@ class Dashboard extends Component {
         data: res.data.businesses,
         value: this.state.value,
         name: this.state.name
-      },()=>console.log(this.state))
+      },()=>(console.log(this.state.data)))
     })
 
   }
   
   handleChange = (newValue) => {
-    this.searchRes(newValue)
-    this.setState({ value: newValue } )
+    this.setState({ value: newValue },()=>(this.searchRes(newValue)) )
+    
   }
 
   handleCategoryChange = (newName) => {
-    this.searchRes((newName),
-    this.setState({ name: newName } ))
+    this.setState({ name: newName },()=>(this.searchRes()));
     
   } 
 
@@ -107,30 +104,29 @@ class Dashboard extends Component {
         
         <RadiusDropDown  value={this.state.value} handleChange={this.handleChange} />
         <CategoryButton  name={this.state.name} onClick={this.handleCategoryChange} />
-        
-        <a className="btn-btn"  href="https://m.uber.com/ul/?action=setPickup&client_id=lK4eQqhizA2dFcgORkCRvI6pdkgfQhyt&pickup=my_location&dropoff[formatted_address]=Richmond%2C%20VA%2C%20USA&dropoff[latitude]=37.540725&dropoff[longitude]=-77.436048">UBER BTN</a>
-       {/* this is just a link, we can make  it its own component and update the latitude and longitude at the end of the link */}
-        <Grid
+        {data.length>0?
+        (<Grid
         className="grid"
         // Arbitrary data, should contain keys, possibly heights, etc.
         data={data}
         // Key accessor, instructs grid on how to fet individual keys from the data set
-        keys={d => d.name}
+        keys={d => d.id}
         // Can be a fixed value or an individual data accessor
+        lockScroll={true}
         heights={400}
         // Number of columns
-        columns={this.state.width>640 ? 4 : 1}>
+        columns={this.state.width>640 ? (this.state.width>1080 ? 4 : 2) : 1}>
           
         {(data, maximized, toggle) => (
          
           <div className="cell">
             {maximized && (
-              <BigCard name={data.name} img={data.image_url} toggle={toggle} />
+              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} rating={data.rating} phone={[data.display_phone,data.phone]} address={data.location.display_address} />
             )}
             {!maximized && <SmallCard name={data.name} img={data.image_url} toggle={toggle} />}
           </div>
         )}
-      </Grid>
+      </Grid>) : (<div className="notFound">No results found</div>)}
       </Container>
       
     );

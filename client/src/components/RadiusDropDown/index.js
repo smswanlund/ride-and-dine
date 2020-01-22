@@ -11,12 +11,13 @@ import "./style.css";
       showMenu: false,
       
     };
+    console.log(super())
     this.showMenu=this.showMenu.bind(this);
      this.closeMenu = this.closeMenu.bind(this);
      this.select = this.select.bind(this);
      
   }
-
+  
  
   showMenu(event) {
     event.preventDefault();
@@ -46,8 +47,8 @@ import "./style.css";
   }
 
   select(event) {
-    console.log(event.target.getAttribute("value"))
-    this.props.handleChange(event.target.getAttribute("value"))
+    this.props.handleChange(event.target.getAttribute("value"));;
+    console.log(event.target.getAttribute("value"));
   }  
       
 
@@ -56,9 +57,9 @@ import "./style.css";
     render() {
        
  
- 
-        
+      
       const menuClass = `dropdown-menu${this.state.showMenu ? " show" : ""}`;
+      
       return (
         <div className="dropdown" onClick={this.showMenu}>
           <button
@@ -69,7 +70,8 @@ import "./style.css";
             aria-haspopup="true"
            
           >
-            Choose Radius
+            {console.log(this.props.value)}
+            Radius: {this.props.value==="8046" ? "5 mi" : (this.props.value==="1609" ? "1 mi" : "10 mi")}
           </button>
           <div 
           className={menuClass} 

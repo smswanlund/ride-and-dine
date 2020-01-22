@@ -8,6 +8,7 @@ export class CategoryButton extends React.Component {
       showMenu: false,
       //value: 2000
     };
+  
     this.showMenu=this.showMenu.bind(this);
      this.closeMenu = this.closeMenu.bind(this);
      this.select = this.select.bind(this);
@@ -33,8 +34,8 @@ export class CategoryButton extends React.Component {
 
 
   select(event) {
-    console.log(event.target.getAttribute("name"))
-    this.props.onClick(event.target.getAttribute("name"))
+    this.props.onClick(event.target.getAttribute("name"));
+    console.log(event.target.getAttribute("name"));
   } 
     render() {
        
@@ -53,7 +54,8 @@ export class CategoryButton extends React.Component {
               aria-haspopup="true"
              
             >
-              Choose Category
+              
+              Category: {this.props.name.substring(0,1).toUpperCase()+this.props.name.substring(1,this.props.name.length)}
             </button>
             <div 
             className={menuClass} 

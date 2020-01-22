@@ -33,3 +33,13 @@ img{
     background-size: cover;
     background-position: center center;
 }
+.grid{
+    height:90vh;
+}
+.container-fluid{
+    height:90vh;
+}
+.notFound{
+    display:block;
+    width: 100%;
+}
