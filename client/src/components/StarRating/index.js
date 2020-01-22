@@ -2,7 +2,7 @@ import React from "react";
 import { useTrail, animated } from "react-spring";
 import Star from "../Star";
 
-export const StarRating = ({ rating, setRating }) => {
+export const StarRating = ({ rating }) => {
   // Make <Star /> component aware of animations
   const AnimatedStar = animated(Star);
 
@@ -23,10 +23,6 @@ export const StarRating = ({ rating, setRating }) => {
       {animatedStars.map((props, index) => (
         <AnimatedStar
           active={index + 1 <= rating}
-          onClick={e => {
-            e.stopPropagation();
-            setRating(index + 1);
-          }}
           key={index}
           style={{ ...props }}
         />

@@ -19,6 +19,7 @@ class Dashboard extends Component {
     this.state = {
       error: null,
       isLoading: true,
+      maxData:[],
       data: [],
       name: "all",
       value: "8046",
@@ -50,28 +51,46 @@ class Dashboard extends Component {
     this.searchRes(this.state.value, this.state.name);
   }
   searchRes(name) {
-    axios.get(`${'https://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?`, {
+    axios.get(`${'http://localhost:8080/'}https://api.yelp.com/v3/businesses/search?`, {
       headers: {
         Authorization: `Bearer ${pass}`
     },
       params: {
       latitude: lat,
       longitude: lng,
-      rating: 5,
-      categories: this.state.name,
-      limit: 8,
       radius: this.state.value,
-      sort_by:"rating",
+      categories: this.state.name,
+      limit: 50,
+      sort_by:"distance",
       term:"food"
     }
     })
     .then((res) => {
       this.setState({
         isLoading: false,
-        data: res.data.businesses,
+        maxData: res.data.businesses.filter(place=>{for(var i =0; i<place.categories.length; i++){
+          if(place.categories[i].alias=="foodtrucks"||place.categories[i].alias=="convenience"||place.categories[i].alias=="grocery"){
+            return;
+          }
+          else{
+          }
+        }
+      return place}).sort(function(a,b){
+        return (b.rating-a.rating);
+      }),
         value: this.state.value,
-        name: this.state.name
-      },()=>(console.log(this.state.data)))
+        name: this.state.name,
+        data: res.data.businesses.filter(place=>{for(var i =0; i<place.categories.length; i++){
+          if(place.categories[i].alias=="foodtrucks"||place.categories[i].alias=="convenience"||place.categories[i].alias=="grocery"){
+            return;
+          }
+          else{
+          }
+        }
+      return place}).sort(function(a,b){
+        return (b.rating-a.rating);
+      }).splice(0,8)
+      },()=>(console.log(this.state)))
     })
 
   }

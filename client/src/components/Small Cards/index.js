@@ -10,7 +10,7 @@ export const SmallCard = (stuff) => {
    <div className="card" onClick={stuff.toggle}>
           <div className="card-header">{stuff.name}</div>
           <ul>
-          <li className="list-group-item"><img src={stuff.img} alt={stuff.name+" picture from yelp"} /></li>
+          <li className="list-group-item"><img src={stuff.img||"https://via.placeholder.com/400"} alt={stuff.name+" picture from yelp"} /></li>
       </ul>
       <div className="card-bottom"></div>
       </div>

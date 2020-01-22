@@ -10,12 +10,12 @@ export class Star extends Component {
         <svg
           className="Star__icon"
           height="96px"
-          onClick={this.props.onClick}
           onMouseEnter={this.props.onMouseEnter}
           width="102px"
           viewBox="0 0 102 96"
           version="1.1"
         >
+          
           <g
             fill="none"
             fillRule="evenodd"
