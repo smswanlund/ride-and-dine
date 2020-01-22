@@ -1,46 +1,47 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
 
 class Detail extends Component {
-  state = {
-    book: {}
-  };
-  // When this component mounts, grab the book with the _id of this.props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
-  componentDidMount() {
-    API.getBook(this.props.match.params.id)
-      .then(res => this.setState({ book: res.data }))
-      .catch(err => console.log(err));
+ 
+ componentDidMount() {
   }
 
   render() {
     return (
-      <Container fluid>
+      <Container fluid className="align-center">
         <Row>
-          <Col size="md-12">
-            <Jumbotron>
-              <h1>
-                {this.state.book.title} by {this.state.book.author}
-              </h1>
-            </Jumbotron>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Synopsis</h1>
-              <p>
-                {this.state.book.synopsis}
-              </p>
-            </article>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-2">
-            <Link to="/">← Back to Authors</Link>
+        <Col size="lg-3" />
+        <Col size="lg-6" offset="3">
+            <div className="card" >
+              <div className="card-body text-center">
+                <h2>Create Account</h2>
+                <div className="form-group row" >
+                    <label for="username" className="col-sm-2">Username</label>
+                    <div className="col-sm-10">
+                      <input type="text" id="username" className="form-control" />
+                    </div>
+                </div>
+                <div className="form-group row" >
+                    <label for="email" className="col-sm-2">Email</label>
+                    <div className="col-sm-10">
+                      <input type="text" id="email" className="form-control" />
+                    </div>
+                </div>
+                <div className="form-group row" >
+                    <label for="name" className="col-sm-2">Name</label>
+                    <div className="col-sm-10">
+                      <input type="text" id="name" className="form-control" />
+                    </div>
+                </div>
+                <div className="form-group row" >
+                    <label for="password" className="col-sm-2">Password</label>
+                    <div className="col-sm-10">
+                      <input type="password" id="password" className="form-control" />
+                    </div>
+                </div>
+                <button className="btn btn-primary">Create Account</button>
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>
