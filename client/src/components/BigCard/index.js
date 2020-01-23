@@ -16,7 +16,7 @@ import StarRating from "../StarRating";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 let reviews = [];
 export const BigCard = (stuff) => {
-  Axios.get(`${'https://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
+  Axios.get(`${'http://localhost:8080/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
     Authorization: `Bearer ${pass}`
 }}).then((res)=>{reviews=res.data.reviews;
 console.log(reviews)})
@@ -39,11 +39,12 @@ console.log(reviews)})
     zIndex: selected===1 ? 1000 : -50,
     transform: `rotateY(${selected ? 180 : 0}deg)`
   });
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + stuff.address[0])
   return (
-   
+    
       <animated.div
       className="RatingsCard"
-      
+     
       
      
       style={{ transform: !selected && props.state.interpolate(transformCard) }}
@@ -68,7 +69,10 @@ console.log(reviews)})
         <div className="big-bottom">
           <div className="reviews card_block"><a href="javacript:" className="btn btn-outline-danger card_button reviews" onClick={()=>setSelected(1)}>Read the Reviews</a></div>
           <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
-          <div className="rides card_block"><a className="btn btn-outline-success card_button rides">Get a Ride</a></div>
+          <div className="rides card_block">
+            <a className="btn btn-outline-success card_button rides"
+            href={`https://m.uber.com/ul/?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=University%20of%20Richmond%2C%20Westhampton%20Way%2C%20Richmond%2C%20VA%2C%20USA&dropoff[latitude]=${stuff.coordinates}&dropoff[longitude]=${stuff.coordinates}`}>Get a Ride</a >
+            </div>
         </div>
 
       </animated.div>
