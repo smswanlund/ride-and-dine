@@ -121,7 +121,7 @@ class Dashboard extends Component {
          
           <div className="cell">
             {maximized && (
-              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} rating={data.rating} phone={[data.display_phone,data.phone]} address={data.location.display_address} />
+              <BigCard name={data.name} img={data.image_url} toggle={toggle} id={data.id} rating={data.rating} phone={[data.display_phone,data.phone]} coordinates={data.coordinates} address={data.location.display_address} />
             )}
             {!maximized && <SmallCard name={data.name} img={data.image_url} toggle={toggle} />}
           </div>
