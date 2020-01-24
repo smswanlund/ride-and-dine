@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../actions/authActions";
 import classnames from "classnames";
+
 class Register extends Component {
   constructor() {
     super();
@@ -16,12 +17,14 @@ class Register extends Component {
       errors: {}
     };
   }
+
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -29,10 +32,12 @@ class Register extends Component {
       });
     }
   }
+
   onChange = e => {
     console.log('I see change')
     this.setState({ [e.target.id]: e.target.value });
   };
+
   onSubmit = e => {
     e.preventDefault();
     console.log("trying log")
@@ -42,8 +47,10 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password
     };
+
     this.props.registerUser(newUser, this.props.history);
   };
+
   render() {
     const { errors } = this.state;
     return (
@@ -122,16 +129,21 @@ class Register extends Component {
       </Container>
     );
   }
+
+  
 }
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
   // errors: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
+
+
 export default connect(
   mapStateToProps,
   { registerUser }
