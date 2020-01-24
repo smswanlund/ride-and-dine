@@ -72,7 +72,7 @@ console.log(reviews)})
           <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
           <div className="rides card_block">
             <a className="btn btn-outline-success card_button rides" 
-            href={`https://m.uber.com/${( isMobile.iOS() || isMobile.Android() )?"ul/":""}?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=${formatted_address}&dropoff[latitude]=${stuff.coordinates.latitude}&dropoff[longitude]=${stuff.coordinates.longitude}`}>Get a Ride</a >
+            href={`https://m.uber.com/${/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)?"ul/":""}?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=${formatted_address}&dropoff[latitude]=${stuff.coordinates.latitude}&dropoff[longitude]=${stuff.coordinates.longitude}`}>Get a Ride</a >
             </div>
         </div>
         
