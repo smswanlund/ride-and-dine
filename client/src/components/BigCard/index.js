@@ -39,7 +39,8 @@ console.log(reviews)})
     zIndex: selected===1 ? 1000 : -50,
     transform: `rotateY(${selected ? 180 : 0}deg)`
   });
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + stuff.address[0])
+  let formatted_address = stuff.address.toString().replace(/,/g, ' ');
+  console.log(stuff)
   return (
     
       <animated.div
@@ -70,16 +71,15 @@ console.log(reviews)})
           <div className="reviews card_block"><a href="javacript:" className="btn btn-outline-danger card_button reviews" onClick={()=>setSelected(1)}>Read the Reviews</a></div>
           <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
           <div className="rides card_block">
-            <a className="btn btn-outline-success card_button rides"
-            href={`https://m.uber.com/ul/?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=University%20of%20Richmond%2C%20Westhampton%20Way%2C%20Richmond%2C%20VA%2C%20USA&dropoff[latitude]=${stuff.coordinates}&dropoff[longitude]=${stuff.coordinates}`}>Get a Ride</a >
+            <a className="btn btn-outline-success card_button rides" 
+            href={`https://m.uber.com/${/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)?"ul/":""}?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=${formatted_address}&dropoff[latitude]=${stuff.coordinates.latitude}&dropoff[longitude]=${stuff.coordinates.longitude}`}>Get a Ride</a >
             </div>
         </div>
-
+        
       </animated.div>
       {/* Back */}
       <animated.div
         className="card big-card big-card-back"
-        onClick={()=>setSelected(0)}
         style={{
           opacity,
           zIndex,
@@ -88,6 +88,31 @@ console.log(reviews)})
       >
         {/* Show rating only if the card is selected */}
         {selected===1 && (
+            <div>
+          <div className="big-header card-header">{stuff.name}<button className="btn btn-outline-danger close-card"  onClick={stuff.toggle}>X</button></div>
+          <ul>
+          <li className="list-group-item review-container">{reviews.map((review)=>(<div className="aReview">
+              <StarRating rating={review.rating} />
+          <div>{review.text.indexOf("...")!==-1?(<div>{review.text.substring(0,review.text.length-3)}<a href={review.url}>...</a></div>) :review.text}</div></div>)
+          )}</li>
+      </ul>
+      <div className="big-bottom">
+          <div className="reviews card_block"><a href="javacript:" className="btn btn-outline-danger card_button reviews" onClick={()=>setSelected(0)}>Back to Info</a></div>
+          <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
+          <div className="rides card_block"><a className="btn btn-outline-success card_button rides" onclick={()=>setSelected(2)}>Get a Ride</a></div>
+        </div>
+      </div>)}
+      </animated.div>
+      <animated.div
+        className="card big-card big-card-back"
+        style={{
+          opacity,
+          zIndex,
+          transform: transform.interpolate(inverseTransform)
+        }}
+      >
+        {/* Show rating only if the card is selected */}
+        {selected===2 && (
             <div>
           <div className="big-header card-header">{stuff.name}<button className="btn btn-outline-danger close-card"  onClick={stuff.toggle}>X</button></div>
           <ul>
