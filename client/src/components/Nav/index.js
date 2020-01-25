@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-blue">
+      <img class="logo" src="RNDlogo.PNG" alt="RND logo"></img>
       <a className="navbar-brand" href="/">
         Ride and Dine
       </a>
