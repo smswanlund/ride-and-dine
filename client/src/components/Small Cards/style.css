@@ -1,5 +1,5 @@
 .card-header{
-    background-color: #FFD7A2;
+    background-color: rgb(246, 177, 87);
     color:white;
     text-align:center;
     font-size:120%;
@@ -10,7 +10,7 @@
 .card-bottom{
     height:50px;
     text-align:center;
-    background-color:#FFBDA8;
+    background-color:rgb(246, 115, 75);
 }
 .card{
     margin:10px 10px;

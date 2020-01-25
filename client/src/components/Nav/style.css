@@ -2,5 +2,9 @@
     display:none;
 }
 .bg-blue{
-    background-color: #70BCFE;
+    background-color: rgb(52, 121, 182);
+}
+
+.navbar-nav{
+    color: white;
 }
