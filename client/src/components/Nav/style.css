@@ -8,3 +8,9 @@
 .navbar-nav{
     color: white;
 }
+
+.logo{
+    height: 42px;
+    width: 42px;
+    margin-right: 10px
+}
