@@ -16,7 +16,7 @@ import StarRating from "../StarRating";
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 let reviews = [];
 export const BigCard = (stuff) => {
-  Axios.get(`${'http://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
+  Axios.get(`${(window.location.href.indexOf("localhost")!==-1?'http://localhost:8080/':'https://ride-and-dine-cors.herokuapp.com/')}https://api.yelp.com/v3/businesses/`+stuff.id+`/reviews`, {headers: {
     Authorization: `Bearer ${pass}`
 }}).then((res)=>{reviews=res.data.reviews;
 console.log(reviews)})
@@ -62,7 +62,7 @@ console.log(reviews)})
           <ul>
           <li className="list-group-item">
               <StarRating rating={stuff.rating} />
-              <img className="big-picture" src={stuff.img} alt={stuff.name+" picture from yelp"} /><br/>
+              <img className="big-picture" src={stuff.img?stuff.img:"https://via.placeholder.com/150"} alt={stuff.name+" picture from yelp"} /><br/>
               <a href={"tel:"+stuff.phone[1]}>{stuff.phone[0]}</a> <br/>
               <a href={"https://maps.google.com/?q="+stuff.address[0]}>{stuff.address[0]+" "+stuff.address[1]}</a>
               </li>
@@ -72,7 +72,7 @@ console.log(reviews)})
           <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
           <div className="rides card_block">
             <a className="btn btn-outline-success card_button rides" 
-            href={`https://m.uber.com/${/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)?"ul/":""}?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=${formatted_address}&dropoff[latitude]=${stuff.coordinates.latitude}&dropoff[longitude]=${stuff.coordinates.longitude}`}>Get a Ride</a >
+            href={selected===0?`https://m.uber.com/${/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)?"ul/":""}?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=${formatted_address}&dropoff[latitude]=${stuff.coordinates.latitude}&dropoff[longitude]=${stuff.coordinates.longitude}`:"javascrip:"}>Get a Ride</a >
             </div>
         </div>
         
@@ -99,32 +99,10 @@ console.log(reviews)})
       <div className="big-bottom">
           <div className="reviews card_block"><a href="javacript:" className="btn btn-outline-danger card_button reviews" onClick={()=>setSelected(0)}>Back to Info</a></div>
           <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
-          <div className="rides card_block"><a className="btn btn-outline-success card_button rides" onclick={()=>setSelected(2)}>Get a Ride</a></div>
-        </div>
-      </div>)}
-      </animated.div>
-      <animated.div
-        className="card big-card big-card-back"
-        style={{
-          opacity,
-          zIndex,
-          transform: transform.interpolate(inverseTransform)
-        }}
-      >
-        {/* Show rating only if the card is selected */}
-        {selected===2 && (
-            <div>
-          <div className="big-header card-header">{stuff.name}<button className="btn btn-outline-danger close-card"  onClick={stuff.toggle}>X</button></div>
-          <ul>
-          <li className="list-group-item review-container">{reviews.map((review)=>(<div className="aReview">
-              <StarRating rating={review.rating} />
-          <div>{review.text.indexOf("...")!==-1?(<div>{review.text.substring(0,review.text.length-3)}<a href={review.url}>...</a></div>) :review.text}</div></div>)
-          )}</li>
-      </ul>
-      <div className="big-bottom">
-          <div className="reviews card_block"><a href="javacript:" className="btn btn-outline-danger card_button reviews" onClick={()=>setSelected(0)}>Back to Info</a></div>
-          <div className="delivery card_block"><a className="btn btn-outline-warning card_button delivery">Get it Delivered</a></div>
-          <div className="rides card_block"><a className="btn btn-outline-success card_button rides">Get a Ride</a></div>
+          <div className="rides card_block">
+            <a className="btn btn-outline-success card_button rides" 
+            href={`https://m.uber.com/${/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)?"ul/":""}?action=setPickup&client_id=gS1zLWUgZgbzV6zacJZhY9BVN7FtRCn4&pickup=my_location&dropoff[formatted_address]=${formatted_address}&dropoff[latitude]=${stuff.coordinates.latitude}&dropoff[longitude]=${stuff.coordinates.longitude}`}>Get a Ride</a >
+            </div>
         </div>
       </div>)}
       </animated.div>

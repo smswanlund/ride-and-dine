@@ -8,6 +8,7 @@ import axios from "axios";
 import {Grid} from 'mauerwerk';
 import BigCard from "../components/BigCard";
 
+
 const pass ="cYmchs-D7ks1z6zf7ZmYjUaQA9520b_efKJEruSleDKTTrcIbFohp9JLOHOr186XIPlnC8Sj9dOZRY_QsNyLU0_FgLdsmQXsINQWEBHQdcoLjRc-qfDUJhEhRfYPXnYx"
 let lat='';
 let lng='';
@@ -35,6 +36,10 @@ class Dashboard extends Component {
     this.setState({width:window.innerWidth || document.getElementById.clientWidth})
   }
   componentDidMount() {
+    if (!sessionStorage.jwtToken) {
+      this.props.history.push("/");
+    }
+  
     window.addEventListener("resize",this.updateWidth());
     navigator.geolocation?(navigator.geolocation.getCurrentPosition(this.displayLocationInfo)):(console.log("oof1"))
     this.state.location?(this.searchRes()):(console.log("oof"));
@@ -50,7 +55,7 @@ class Dashboard extends Component {
     this.searchRes(this.state.value, this.state.name);
   }
   searchRes(name) {
-    axios.get(`${'https://ride-and-dine-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?`, {
+    axios.get(`${(window.location.href.indexOf("localhost")!==-1?'http://localhost:8080/':'https://ride-and-dine-cors.herokuapp.com/')}https://api.yelp.com/v3/businesses/search?`, {
       headers: {
         Authorization: `Bearer ${pass}`
     },
@@ -61,7 +66,7 @@ class Dashboard extends Component {
       categories: this.state.name,
       limit: 8,
       radius: this.state.value,
-      sort_by:"rating",
+      sort_by:"distance",
       term:"food"
     }
     })
