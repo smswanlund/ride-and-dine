@@ -74,8 +74,28 @@ class Dashboard extends Component {
     .then((res) => {
       this.setState({
         isLoading: false,
-
-        data: res.data.businesses,
+        maxdata: res.data.businesses.filter(place=>{
+          for(var i in place.categories){
+            if(place.categories[i].alias=="foodtrucks"||place.categories[i].alias=="convenience"){
+              return false;
+            }
+            
+          }
+          return place
+        }).sort((a,b)=>{
+          return a.rating-b.rating;
+        }),
+        data: res.data.businesses.filter(place=>{
+          for(var i in place.categories){
+            if(place.categories[i].alias=="foodtrucks"||place.categories[i].alias=="convenience"){
+              return false;
+            }
+            
+          }
+          return place;
+        }).sort((a,b)=>{
+          return b.rating-a.rating;
+        }).splice(0,8),
         value: this.state.value,
         name: this.state.name
       },()=>(console.log(this.state.data)))
