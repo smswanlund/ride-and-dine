@@ -20,6 +20,7 @@ class Dashboard extends Component {
     this.state = {
       error: null,
       isLoading: true,
+      maxdata:[],
       data: [],
       name: "all",
       value: "8046",
@@ -64,7 +65,7 @@ class Dashboard extends Component {
       longitude: lng,
       rating: 5,
       categories: this.state.name,
-      limit: 8,
+      limit: 50,
       radius: this.state.value,
       sort_by:"distance",
       term:"food"
@@ -73,6 +74,7 @@ class Dashboard extends Component {
     .then((res) => {
       this.setState({
         isLoading: false,
+
         data: res.data.businesses,
         value: this.state.value,
         name: this.state.name
