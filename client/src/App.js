@@ -38,7 +38,7 @@ function App() {
       
         <Nav />
         <Switch>
-          <Route exact path="/" component={Main} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/main" component={Main} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/createaccount" component={Create} />
